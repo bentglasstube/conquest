@@ -37,6 +37,44 @@ std::string Generators::generate_conference_email_body(const std::string& conf_n
   return body;
 }
 
+std::string Generators::generate_angry_email_subject() {
+  return random_element(angry_email_subjects_);
+}
+
+std::string Generators::generate_angry_email_body(const std::string& from, int lives) {
+  std::string body = random_element(email_greetings_) + "\n\n";
+
+  body += "  It has come to our attention that you did not attend the recent\n";
+  body += "conference that you expensed to the company.  This is a waste of\n";
+  body += "company resources and is against our expense policies.\n\n";
+
+  switch (lives) {
+    case 0:
+
+      body += "Because you have violated this policy multiple times this year,\n";
+      body += "we regret to say that we must terminate your employment with us\n";
+      body += "effective immediately.\n";
+      break;
+
+    case 1:
+
+      body += "This is your final warning.  Violating company policies again\n";
+      body += "will result in disciplinary action, up to an including\n";
+      body += "termination of employment.\n";
+      break;
+
+    default:
+
+      body += "This is just a warning.  We understand everyone makes mistakes.\n";
+      body += "Please do not let this happen again.\n";
+      break;
+  }
+
+  body += random_element(email_signoffs_) + "\n" + from;
+
+  return body;
+}
+
 std::string Generators::random_element(std::vector<std::string> set) {
   // using modulo because lazy, don't really care about bias for now
   return set[std::rand() % set.size()];
@@ -278,3 +316,7 @@ const std::vector<std::string> Generators::email_signoffs_ = {
   "Thanks!",
 };
 
+const std::vector<std::string> Generators::angry_email_subjects_ = {
+  "Please see me this afternoon", "HR Meeting Required",
+  "Wasting Company Resources", "Conference Attendance",
+};

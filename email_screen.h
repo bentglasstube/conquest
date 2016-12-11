@@ -23,7 +23,10 @@ class EmailScreen : public Screen {
 
     class Email {
       public:
-        Email(const std::string& month);
+        Email();
+
+        static Email make_conference_email(const std::string& month);
+        static Email make_angry_boss_email(int lives);
 
         std::string from, subject, body;
         bool conference;

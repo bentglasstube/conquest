@@ -70,7 +70,14 @@ bool EmailScreen::update(const Input& input, Audio& audio, unsigned int elapsed)
     // simulate getting new mail
     if (emails_.size() < 10) {
       if (std::rand() % 100 == 1) {
-        emails_.emplace_back(current_month());
+
+        if (state_.lost_previous) {
+          emails_.push_back(Email::make_angry_boss_email(state_.lives));
+          state_.lost_previous = false;
+        } else if (state_.lives > 0) {
+          emails_.push_back(Email::make_conference_email(current_month()));
+        }
+
         audio.play_sample("newmail.wav");
       }
     }
@@ -145,14 +152,29 @@ void EmailScreen::set_game_state(GameState state) {
   state_ = state;
 }
 
-EmailScreen::Email::Email(const std::string& month) {
-  from = Generators::generate_name();
+EmailScreen::Email::Email() : from(""), subject(""), body(""), conference(false) {}
 
-  // TODO add silly emails as well
+EmailScreen::Email EmailScreen::Email::make_conference_email(const std::string& month) {
+  EmailScreen::Email email;
+
   const std::string conf_name = Generators::generate_conference_name();
-  subject = Generators::generate_conference_email_subject(conf_name);
-  body = Generators::generate_conference_email_body(conf_name, from, month);
-  conference = true;
+
+  email.from = Generators::generate_name();
+  email.subject = Generators::generate_conference_email_subject(conf_name);
+  email.body = Generators::generate_conference_email_body(conf_name, email.from, month);
+  email.conference = true;
+
+  return email;
+}
+
+EmailScreen::Email EmailScreen::Email::make_angry_boss_email(int lives) {
+  EmailScreen::Email email;
+
+  email.from = Generators::generate_name();
+  email.subject = Generators::generate_angry_email_subject();
+  email.body = Generators::generate_angry_email_body(email.from, lives);
+
+  return email;
 }
 
 void EmailScreen::draw_hand(Graphics& graphics, int length, float value, int color) const {

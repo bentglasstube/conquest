@@ -59,8 +59,6 @@ bool LobbyScreen::update(const Input& input, Audio& audio, unsigned int elapsed)
 void LobbyScreen::draw(Graphics& graphics) const {
   backdrop_->draw(graphics);
 
-  // draw attendant
-
   player_->draw(graphics);
   enemy_->draw(graphics);
 
