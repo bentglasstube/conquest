@@ -73,12 +73,17 @@ bool EmailScreen::update(const Input& input, Audio& audio, unsigned int elapsed)
 
         if (state_.lost_previous) {
           emails_.push_back(Email::make_angry_boss_email(state_.lives));
+          audio.play_sample("newmail.wav");
           state_.lost_previous = false;
         } else if (state_.lives > 0) {
-          emails_.push_back(Email::make_conference_email(current_month()));
+          if (state_.month < 11) {
+            emails_.push_back(Email::make_conference_email(current_month()));
+          } else {
+            emails_.push_back(Email::make_bonus_email(state_.lives));
+            state_.lives = 0;
+          }
+          audio.play_sample("newmail.wav");
         }
-
-        audio.play_sample("newmail.wav");
       }
     }
   }
@@ -108,8 +113,10 @@ void EmailScreen::draw(Graphics& graphics) const {
 
     font_->draw(graphics, email.body, x, y + 48, green);
 
-    // TODO only show "register" on conference emails
-    font_->draw(graphics, "D: delete   ESC: inbox   ENTER: register", x, y + 416, green);
+    std::string controls = "D: delete   ESC: inbox   ";
+    if (email.conference) controls += "ENTER: register";
+
+    font_->draw(graphics, controls, x, y + 416, green);
 
   } else {
     // draw email inbox
@@ -173,6 +180,16 @@ EmailScreen::Email EmailScreen::Email::make_angry_boss_email(int lives) {
   email.from = Generators::generate_name();
   email.subject = Generators::generate_angry_email_subject();
   email.body = Generators::generate_angry_email_body(email.from, lives);
+
+  return email;
+}
+
+EmailScreen::Email EmailScreen::Email::make_bonus_email(int lives) {
+  EmailScreen::Email email;
+
+  email.from = Generators::generate_name();
+  email.subject = Generators::generate_bonus_email_subject();
+  email.body = Generators::generate_bonus_email_body(email.from, lives);
 
   return email;
 }

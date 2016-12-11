@@ -51,25 +51,26 @@ bool RPSScreen::update(const Input& input, Audio& audio, unsigned int elapsed) {
 
       if (text_) {
         text_->update(audio, elapsed);
+
+        if (input.any_pressed()) {
+          if (text_->done()) {
+            if (p1score_ == 2) {
+              player_won();
+              return false;
+            } else if (p2score_ > p1score_) {
+              player_lost();
+              return false;
+            }
+
+            stage_ = Stage::Choose;
+            text_.reset(NULL);
+          } else {
+            text_->finish();
+          }
+        }
+
       } else if (timer_ <= 0) {
         stage_ = Stage::Choose;
-      }
-
-      if (input.any_pressed()) {
-        if (text_->done()) {
-          if (p1score_ == 2) {
-            player_won();
-            return false;
-          } else if (p2score_ > p1score_) {
-            player_lost();
-            return false;
-          }
-
-          stage_ = Stage::Choose;
-          text_.reset(NULL);
-        } else {
-          text_->finish();
-        }
       }
 
       break;

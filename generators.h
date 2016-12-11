@@ -13,6 +13,8 @@ class Generators {
     static std::string generate_conference_email_body(const std::string& conf_name, const std::string& from, const std::string& month);
     static std::string generate_angry_email_subject();
     static std::string generate_angry_email_body(const std::string& from, int lives);
+    static std::string generate_bonus_email_subject();
+    static std::string generate_bonus_email_body(const std::string& from, int lives);
 
   private:
 
@@ -27,4 +29,5 @@ class Generators {
     static const StringSet conference_email_leaders_;
     static const StringSet email_greetings_, email_signoffs_;
     static const StringSet angry_email_subjects_;
+    static const StringSet bonus_email_subjects_, holiday_bonus_;
 };

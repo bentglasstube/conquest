@@ -32,7 +32,7 @@ bool LobbyScreen::update(const Input& input, Audio& audio, unsigned int elapsed)
 
         // TODO randomize text
         stage_ = 1;
-        text_.reset(new AppearingText("Welcome to HOTEL NAME.  I am sad to say that we have only ONE ROOM available..."));
+        text_.reset(new AppearingText("Welcome to HOTEL NAME.\nI am sad to say that we have only ONE ROOM available..."));
       }
 
       break;
@@ -65,7 +65,7 @@ void LobbyScreen::draw(Graphics& graphics) const {
   switch (stage_) {
     case 1:
 
-      text_->draw(graphics, font_.get(), 600, 100, 0xfff1e8ff);
+      text_->draw(graphics, font_.get(), 450, 100, 0xfff1e8ff);
       break;
 
     case 2:

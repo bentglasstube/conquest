@@ -53,22 +53,41 @@ std::string Generators::generate_angry_email_body(const std::string& from, int l
 
       body += "Because you have violated this policy multiple times this year,\n";
       body += "we regret to say that we must terminate your employment with us\n";
-      body += "effective immediately.\n";
+      body += "effective immediately.\n\n";
       break;
 
     case 1:
 
       body += "This is your final warning.  Violating company policies again\n";
-      body += "will result in disciplinary action, up to an including\n";
-      body += "termination of employment.\n";
+      body += "will result in disciplinary action, up to and including\n";
+      body += "termination of employment.\n\n";
       break;
 
     default:
 
       body += "This is just a warning.  We understand everyone makes mistakes.\n";
-      body += "Please do not let this happen again.\n";
+      body += "Please do not let this happen again.\n\n";
       break;
   }
+
+  body += random_element(email_signoffs_) + "\n" + from;
+
+  return body;
+}
+
+std::string Generators::generate_bonus_email_subject() {
+  return random_element(bonus_email_subjects_);
+}
+
+std::string Generators::generate_bonus_email_body(const std::string& from, int lives) {
+  const int conferences = 8 + lives;
+
+  std::string body = random_element(email_greetings_) + "\n\n";
+
+  body += "   Congratulations on another great year.  In order to thank you for\n";
+  body += "your hard work and for representing our company at ";
+  body += std::to_string(conferences) + " conferences this year,\n";
+  body += random_element(holiday_bonus_) + "\n\n";
 
   body += random_element(email_signoffs_) + "\n" + from;
 
@@ -319,4 +338,14 @@ const std::vector<std::string> Generators::email_signoffs_ = {
 const std::vector<std::string> Generators::angry_email_subjects_ = {
   "Please see me this afternoon", "HR Meeting Required",
   "Wasting Company Resources", "Conference Attendance",
+};
+
+const std::vector<std::string> Generators::bonus_email_subjects_ = {
+  "Your Year End Bonus", "Congratulations on Another Great Year",
+  "Happy Holidays", "Rewarding our Top Performers",
+};
+
+const std::vector<std::string> Generators::holiday_bonus_ = {
+  "we have signed you up for a jelly of the month club!",
+  "we have made a charitable donation on your behalf.",
 };
