@@ -39,8 +39,8 @@ bool EmailScreen::update(const Input& input, Audio& audio, unsigned int elapsed)
     }
 
     if (email.conference && input.key_pressed(SDL_SCANCODE_RETURN)) {
-      // TODO register for conference
       audio.play_sample("register.wav");
+      return false;
     }
 
   } else {

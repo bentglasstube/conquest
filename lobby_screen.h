@@ -3,9 +3,12 @@
 #include <memory>
 
 #include "backdrop.h"
+#include "font.h"
 #include "screen.h"
 
+#include "appearing_text.h"
 #include "game_state.h"
+#include "person.h"
 
 class LobbyScreen : public Screen {
   public:
@@ -19,7 +22,12 @@ class LobbyScreen : public Screen {
 
   private:
 
-    std::unique_ptr<Backdrop> backdrop_;
+    int stage_;
 
     GameState state_;
+
+    std::unique_ptr<Font> font_;
+    std::unique_ptr<Backdrop> backdrop_;
+    std::unique_ptr<Person> player_, enemy_;
+    std::unique_ptr<AppearingText> text_;
 };

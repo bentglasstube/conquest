@@ -17,16 +17,33 @@ cc_binary(
 )
 
 cc_library(
-    name = "email_screen",
-    srcs = ["email_screen.cc"],
-    hdrs = ["email_screen.h"],
+    name = "appearing_text",
+    srcs = ["appearing_text.cc"],
+    hdrs = ["appearing_text.h"],
+    deps = [
+        "@libgam//:audio",
+        "@libgam//:font",
+        "@libgam//:graphics",
+    ],
+)
+
+cc_library(
+    name = "game_screens",
+    srcs = [
+        "email_screen.cc", "lobby_screen.cc"
+    ],
+    hdrs = [
+        "email_screen.h",
+        "lobby_screen.h",
+    ],
     deps = [
         "@libgam//:backdrop",
         "@libgam//:font",
         "@libgam//:screen",
+        ":appearing_text",
         ":game_state",
         ":generators",
-        ":lobby_screen",
+        ":person",
     ],
 )
 
@@ -43,13 +60,11 @@ cc_library(
 )
 
 cc_library(
-    name = "lobby_screen",
-    srcs = ["lobby_screen.cc"],
-    hdrs = ["lobby_screen.h"],
+    name = "person",
+    srcs = ["person.cc"],
+    hdrs = ["person.h"],
     deps = [
-        "@libgam//:backdrop",
-        "@libgam//:screen",
-        ":game_state",
+        "@libgam//:spritemap",
     ],
 )
 
@@ -61,7 +76,7 @@ cc_library(
         "@libgam//:backdrop",
         "@libgam//:screen",
         "@libgam//:text",
-        ":email_screen",
+        ":game_screens",
         ":game_state",
     ],
 )
