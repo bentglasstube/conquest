@@ -4,9 +4,9 @@
 
 #include "backdrop.h"
 #include "input.h"
+#include "font.h"
 #include "graphics.h"
 #include "screen.h"
-#include "text.h"
 
 #include "email_screen.h"
 
@@ -21,7 +21,7 @@ class TitleScreen : public Screen {
 
   private:
 
-    std::unique_ptr<Text> text_;
     std::unique_ptr<Backdrop> backdrop_;
+    std::unique_ptr<Font> font_;
 
 };

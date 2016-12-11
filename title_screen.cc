@@ -1,7 +1,7 @@
 #include "title_screen.h"
 
 void TitleScreen::init() {
-  text_.reset(new Text("text.png"));
+  font_.reset(new Font("Roboto-Regular.ttf", 20));
   backdrop_.reset(new Backdrop("title.png"));
 }
 
@@ -18,7 +18,7 @@ void TitleScreen::draw(Graphics& graphics) const {
   const int y = graphics.height() / 2;
 
   backdrop_->draw(graphics);
-  text_->draw(graphics, "Press any key", x, y, Text::Alignment::CENTER);
+  font_->draw(graphics, "Press any key", x, y, 0xfff1e8ff);
 }
 
 Screen* TitleScreen::next_screen() {

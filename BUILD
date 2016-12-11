@@ -74,8 +74,8 @@ cc_library(
     hdrs = ["title_screen.h"],
     deps = [
         "@libgam//:backdrop",
+        "@libgam//:font",
         "@libgam//:screen",
-        "@libgam//:text",
         ":game_screens",
         ":game_state",
     ],
