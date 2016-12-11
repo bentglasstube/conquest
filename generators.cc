@@ -247,7 +247,7 @@ const std::vector<std::string> Generators::cities_ = {
 
 const std::vector<std::string> Generators::conference_nouns_ = {
   "Talent", "Dream", "Publisher", "Cyber", "Web", "DevOps", "Design", "Tech",
-  "Biz", "Ops", "Future", "App", "Developer", "Net", "Maker",
+  "Biz", "Ops", "Future", "App", "Developer", "Net", "Maker", "Hacker",
 };
 
 const std::vector<std::string> Generators::conference_endings_ = {
