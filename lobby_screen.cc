@@ -2,15 +2,15 @@
 
 #include "font.h"
 
-#include "email_screen.h"
+#include "rps_screen.h"
 
 void LobbyScreen::init() {
   stage_ = 0;
 
   backdrop_.reset(new Backdrop("lobbybg.png"));
   font_.reset(new Font("Roboto-Regular.ttf"));
-  player_.reset(new Person(Person::Facing::Right, 0, 100));
-  enemy_.reset(new Person(Person::Facing::Left, 1104, 100));
+  player_.reset(new Person(Person::Facing::Right, 0, 200));
+  enemy_.reset(new Person(Person::Facing::Left, 1104, 200));
 }
 
 bool LobbyScreen::update(const Input& input, Audio& audio, unsigned int elapsed) {
@@ -49,18 +49,7 @@ bool LobbyScreen::update(const Input& input, Audio& audio, unsigned int elapsed)
 
     case 2: // enemy challenges you
 
-      if (text_->done() && input.any_pressed()) {
-        // TODO randomize text
-        stage_ = 3;
-        text_.reset(new AppearingText("I accept!"));
-      }
-
-      break;
-
-    case 3: // player responds
-
       if (text_->done() && input.any_pressed()) return false;
-      break;
 
   }
 
@@ -78,29 +67,21 @@ void LobbyScreen::draw(Graphics& graphics) const {
   switch (stage_) {
     case 1:
 
-      text_->draw(graphics, font_.get(), 600, 50, 0xfff1e8ff);
+      text_->draw(graphics, font_.get(), 600, 100, 0xfff1e8ff);
       break;
 
     case 2:
 
-      text_->draw(graphics, font_.get(), 800, 100, 0xfff1e8ff);
+      text_->draw(graphics, font_.get(), 800, 300, 0xfff1e8ff);
       break;
 
-    case 3:
-
-      text_->draw(graphics, font_.get(), 200, 100, 0xfff1e8ff);
-      break;
   }
 }
 
 Screen* LobbyScreen::next_screen() {
-  // determine mini game to play and load that screen next
-
-  // placeholder until mini games work
-  ++state_.month;
-  EmailScreen* screen = new EmailScreen();
+  // TODO determine mini game to play and load that screen next
+  RPSScreen* screen = new RPSScreen();
   screen->set_game_state(state_);
-
   return screen;
 }
 
