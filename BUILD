@@ -8,6 +8,8 @@ cc_binary(
         "-lSDL2_image",
         "-lSDL2_mixer",
         "-lSDL2_ttf",
+        "-static-libstdc++",
+        "-static-libgcc",
     ],
     srcs = ["main.cc"],
     deps = [
