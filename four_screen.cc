@@ -76,6 +76,8 @@ void FourScreen::draw(Graphics& graphics) const {
 
   gameboard_->draw(graphics, 352, 96);
 
+  font_->draw(graphics, "1-7 to place piece", 576, 650, 0xfff1e8ff);
+
   if (text_) text_->draw(graphics, font_.get(), 928, 32, 0xfff1e8ff);
 }
 

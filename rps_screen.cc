@@ -91,9 +91,9 @@ void RPSScreen::draw(Graphics& graphics) const {
       arms_->draw_ex(graphics, 0, 160, 160, false, 0.00, 0, 0);
       arms_->draw_ex(graphics, 0, 642, 160, true, 0.00, 0, 0);
 
-      font_->draw(graphics, "R: rock", 50, 50, 0xfff1e8ff);
-      font_->draw(graphics, "P: paper", 50, 66, 0xfff1e8ff);
-      font_->draw(graphics, "S: scissors", 50, 82, 0xfff1e8ff);
+      font_->draw(graphics, "R: rock", 576, 550, 0xfff1e8ff);
+      font_->draw(graphics, "P: paper", 576, 566, 0xfff1e8ff);
+      font_->draw(graphics, "S: scissors", 576, 582, 0xfff1e8ff);
 
       break;
 
