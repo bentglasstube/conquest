@@ -5,7 +5,7 @@
 
 #include "title_screen.h"
 
-int main(int, char*) {
+int main(int, char**) {
   Game::Config config;
 
   config.graphics.title = "ConQuest - Convention Attendance Simulator";
