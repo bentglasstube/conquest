@@ -2,6 +2,8 @@
 
 #include "font.h"
 
+#include "arm_screen.h"
+#include "four_screen.h"
 #include "rps_screen.h"
 
 void LobbyScreen::init() {
@@ -11,6 +13,8 @@ void LobbyScreen::init() {
   font_.reset(new Font("Roboto-Regular.ttf"));
   player_.reset(new Person(Person::Facing::Right, 0, 200));
   enemy_.reset(new Person(Person::Facing::Left, 1104, 200));
+
+  minigame_ = std::rand() % 3;
 }
 
 bool LobbyScreen::update(const Input& input, Audio& audio, unsigned int elapsed) {
@@ -30,9 +34,9 @@ bool LobbyScreen::update(const Input& input, Audio& audio, unsigned int elapsed)
         player_->stop_walking();
         enemy_->stop_walking();
 
-        // TODO randomize text
         stage_ = 1;
-        text_.reset(new AppearingText("Welcome to HOTEL NAME.\nI am sad to say that we have only ONE ROOM available..."));
+        // TODO randomize text
+        text_.reset(new AppearingText("Welcome to the hotel.\nI am sad to say that we have only ONE ROOM available..."));
       }
 
       break;
@@ -40,9 +44,9 @@ bool LobbyScreen::update(const Input& input, Audio& audio, unsigned int elapsed)
     case 1: // attendant speaks
 
       if (text_->done() && input.any_pressed()) {
-        // TODO randomize text
         stage_ = 2;
-        text_.reset(new AppearingText("In that case, I challenge you to MINIGAME NAME!"));
+        // TODO randomize text
+        text_.reset(new AppearingText("In that case, I challenge you to " + minigame_name()));
       }
 
       break;
@@ -77,12 +81,27 @@ void LobbyScreen::draw(Graphics& graphics) const {
 }
 
 Screen* LobbyScreen::next_screen() {
-  // TODO determine mini game to play and load that screen next
-  RPSScreen* screen = new RPSScreen();
+  MinigameScreen* screen;
+
+  switch (minigame_) {
+    case 0: screen = new RPSScreen(); break;
+    case 1: screen = new FourScreen(); break;
+    case 2: screen = new ArmWrestleScreen(); break;
+  }
+
   screen->set_game_state(state_);
   return screen;
 }
 
 void LobbyScreen::set_game_state(GameState state) {
   state_ = state;
+}
+
+std::string LobbyScreen::minigame_name() const {
+  switch (minigame_) {
+    case 0:  return "rock, paper, scissors";
+    case 1:  return "connect four";
+    case 2:  return "arm wrestling";
+    default: return "ERROR UNKNOWN GAME";
+  }
 }

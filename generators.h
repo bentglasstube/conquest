@@ -15,6 +15,9 @@ class Generators {
     static std::string generate_angry_email_body(const std::string& from, int lives);
     static std::string generate_bonus_email_subject();
     static std::string generate_bonus_email_body(const std::string& from, int lives);
+    static std::string generate_gloat();
+    static std::string generate_concession();
+    static std::string generate_rematch();
 
   private:
 
@@ -30,4 +33,5 @@ class Generators {
     static const StringSet email_greetings_, email_signoffs_;
     static const StringSet angry_email_subjects_;
     static const StringSet bonus_email_subjects_, holiday_bonus_;
+    static const StringSet gloats_, concessions_, rematches_;
 };

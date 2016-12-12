@@ -30,13 +30,17 @@ cc_library(
 cc_library(
     name = "game_screens",
     srcs = [
+        "arm_screen.cc",
         "email_screen.cc",
+        "four_screen.cc",
         "lobby_screen.cc",
         "minigame_screen.cc",
         "rps_screen.cc",
     ],
     hdrs = [
+        "arm_screen.h",
         "email_screen.h",
+        "four_screen.h",
         "lobby_screen.h",
         "minigame_screen.h",
         "rps_screen.h",
@@ -45,6 +49,7 @@ cc_library(
         "@libgam//:backdrop",
         "@libgam//:font",
         "@libgam//:screen",
+        "@libgam//:sprite",
         "@libgam//:spritemap",
         ":appearing_text",
         ":game_state",

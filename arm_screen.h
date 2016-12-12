@@ -4,32 +4,25 @@
 
 #include "backdrop.h"
 #include "font.h"
-#include "screen.h"
+#include "sprite.h"
 
 #include "appearing_text.h"
-#include "game_state.h"
-#include "person.h"
+#include "minigame_screen.h"
 
-class LobbyScreen : public Screen {
+class ArmWrestleScreen : public MinigameScreen {
   public:
 
     void init();
     bool update(const Input& input, Audio& audio, unsigned int elapsed);
     void draw(Graphics& graphics) const;
-    Screen* next_screen();
-
-    void set_game_state(GameState state);
 
   private:
 
-    std::string minigame_name() const;
+    float angle_;
+    int next_button_;
 
-    int stage_, minigame_;
-
-    GameState state_;
-
-    std::unique_ptr<Font> font_;
     std::unique_ptr<Backdrop> backdrop_;
-    std::unique_ptr<Person> player_, enemy_;
+    std::unique_ptr<Sprite> arms_;
+    std::unique_ptr<Font> font_;
     std::unique_ptr<AppearingText> text_;
 };

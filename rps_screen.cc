@@ -1,5 +1,7 @@
 #include "rps_screen.h"
 
+#include "generators.h"
+
 void RPSScreen::init() {
   font_.reset(new Font("Roboto-Regular.ttf"));
   backdrop_.reset(new Backdrop("rpsbg.png"));
@@ -36,11 +38,11 @@ bool RPSScreen::update(const Input& input, Audio& audio, unsigned int elapsed) {
 
         if (p1choice_ != p2choice_) {
           if (p2score_ > p1score_) {
-            text_.reset(new AppearingText("Looks like the room is mine, sucker!"));
+            text_.reset(new AppearingText(Generators::generate_gloat()));
           } else if (p1score_ == 1 && p2score_ == 0) {
             text_.reset(new AppearingText("Best two out of three."));
           } else if (p1score_ == 2) {
-            text_.reset(new AppearingText("Fine, you can have the room."));
+            text_.reset(new AppearingText(Generators::generate_concession()));
           }
         }
       }

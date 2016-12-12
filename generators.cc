@@ -94,6 +94,18 @@ std::string Generators::generate_bonus_email_body(const std::string& from, int l
   return body;
 }
 
+std::string Generators::generate_gloat() {
+  return random_element(gloats_);
+}
+
+std::string Generators::generate_concession() {
+  return random_element(concessions_);
+}
+
+std::string Generators::generate_rematch() {
+  return random_element(rematches_);
+}
+
 std::string Generators::random_element(std::vector<std::string> set) {
   // using modulo because lazy, don't really care about bias for now
   return set[std::rand() % set.size()];
@@ -348,4 +360,24 @@ const std::vector<std::string> Generators::bonus_email_subjects_ = {
 const std::vector<std::string> Generators::holiday_bonus_ = {
   "we have signed you up for a jelly of the month club!",
   "we have made a charitable donation on your behalf.",
+};
+
+const std::vector<std::string> Generators::gloats_ = {
+  "Looks like the room is mine, sucker!",
+  "I guess you're staying outside tonight.",
+  "Better luck next time, bro.",
+  "I hope for your sake it doesn't rain tonight.",
+};
+
+const std::vector<std::string> Generators::concessions_ = {
+  "Fine, you can have the room.",
+  "This hotel is a dump anyway.",
+  "I hope you get bedbugs.",
+  "You must have cheated.",
+};
+
+const std::vector<std::string> Generators::rematches_ = {
+  "It's a tie, we'll have to play again.",
+  "That doesn't settle anything.",
+  "Draw game, let's try again.",
 };
