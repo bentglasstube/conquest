@@ -121,7 +121,7 @@ void EmailScreen::draw(Graphics& graphics) const {
   } else {
     // draw email inbox
 
-    for (int i = 0; i < emails_.size(); ++i) {
+    for (size_t i = 0; i < emails_.size(); ++i) {
       const int yi = y + 40 * i;
 
       const Email email = emails_[i];

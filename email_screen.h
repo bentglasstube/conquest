@@ -39,7 +39,8 @@ class EmailScreen : public Screen {
     std::vector<Email> emails_;
 
     bool reading_;
-    int selected_, clock_ms_;
+    size_t selected_;
+    int clock_ms_;
     GameState state_;
 
     void draw_hand(Graphics& graphics, int length, float value, int color) const;

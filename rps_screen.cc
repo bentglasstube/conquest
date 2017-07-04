@@ -76,6 +76,9 @@ bool RPSScreen::update(const Input& input, Audio& audio, unsigned int elapsed) {
       }
 
       break;
+
+    case Stage::Conclusion:
+      break;
   }
 
   return true;
@@ -135,6 +138,9 @@ void RPSScreen::draw(Graphics& graphics) const {
         text_->draw(graphics, font_.get(), 800, 300, 0xfff1e8ff);
       }
 
+      break;
+
+    case Stage::Conclusion:
       break;
   }
 }

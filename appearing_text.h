@@ -17,6 +17,6 @@ class AppearingText {
 
   private:
 
-    int count_;
+    size_t count_;
     std::string text_;
 };
