@@ -1,7 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
 cc_binary(
-    name = "ld37",
+    name = "conquest",
     data = ["//content"],
     linkopts = [
         "-lSDL2",
