@@ -1,9 +1,21 @@
 package(default_visibility = ["//visibility:public"])
 
+load("@mxebzl//tools/windows:rules.bzl", "pkg_winzip")
+
+config_setting(
+    name = "windows",
+    values = {
+        "crosstool_top": "@mxebzl//tools/windows:toolchain",
+    }
+)
+
 cc_binary(
     name = "conquest",
     data = ["//content"],
-    linkopts = [
+    linkopts = select({
+        ":windows": ["-mwindows", "-lSDL2main" ],
+        "//conditions:default": [],
+    }) + [
         "-lSDL2",
         "-lSDL2_image",
         "-lSDL2_mixer",
@@ -91,5 +103,13 @@ cc_library(
         "@libgam//:screen",
         ":game_screens",
         ":game_state",
+    ],
+)
+
+pkg_winzip(
+    name = "conquest-windows",
+    files = [
+        ":conquest",
+        "//content",
     ],
 )
