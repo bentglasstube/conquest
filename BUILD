@@ -113,3 +113,12 @@ pkg_winzip(
         "//content",
     ],
 )
+
+pkg_tar(
+    name = "conquest-linux",
+    extension = "tar.gz",
+    srcs = [
+        ":conquest",
+        "//content",
+    ],
+)
