@@ -116,7 +116,7 @@ void RPSScreen::draw(Graphics& graphics) const {
     case Stage::Result:
 
       {
-        int p1f, p2f;
+        int p1f = 0, p2f = 0;
 
         switch (p1choice_) {
           case Choice::Rock: p1f = 3; break;

@@ -87,6 +87,7 @@ Screen* LobbyScreen::next_screen() {
     case 0: screen = new RPSScreen(); break;
     case 1: screen = new FourScreen(); break;
     case 2: screen = new ArmWrestleScreen(); break;
+    default: screen = new RPSScreen(); break;
   }
 
   screen->set_game_state(state_);
