@@ -1,0 +1,9 @@
+[Desktop Entry]
+
+Type=Application
+Version=1.0
+Name=CONQuest
+Terminal=false
+Icon=icon
+Exec=conquest
+Categories=Game;

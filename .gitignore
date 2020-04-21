@@ -1,4 +1,12 @@
 bazel-*
-conquest-*.zip
-conquest-*.tgz
-output
+/*.zip
+/*.tgz
+/*.app
+/*.AppImage
+/*.AppDir
+/*.data
+/*.html
+/*.js
+/*.wasm
+/*-web-*/
+*output/
