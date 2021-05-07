@@ -11,7 +11,7 @@ int main(int, char**) {
   config.graphics.title = "ConQuest - Convention Attendance Simulator";
   config.graphics.width = 1280;
   config.graphics.height = 720;
-  config.graphics.fullscreen = true;
+  config.graphics.fullscreen = false;
 
   TitleScreen *s = new TitleScreen();
 
